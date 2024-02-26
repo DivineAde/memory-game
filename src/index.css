@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+:root {
+  --body_background: #fff;
+  --body-color: #000;
+  --link_color: navy;
+}
+
+[data-theme="dark"] {
+  --body_background: #000;
+  --body-color: #fff;
+  --link_color: cyan;
+}
+
+body {
+  background-color: var(--body_background);
+}

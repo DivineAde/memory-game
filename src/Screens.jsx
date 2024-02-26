@@ -2,6 +2,7 @@ import { useState } from "react";
 import confetti from "canvas-confetti";
 import * as icons from "react-icons/gi";
 import { Tile } from "./Tile";
+import DarkTheme from "./components/Themes/DarkTheme"
 
 export const possibleTileContents = [
   icons.GiHearts,
@@ -18,10 +19,21 @@ export const possibleTileContents = [
 
 export function StartScreen({ start }) {
   return (
-    <div>
-      <button onClick={start} className="bg-gray-400 text-white p-3">
-        Play
-      </button>
+    <div className="relative flex flex-col items-center justify-center h-screen">
+      <DarkTheme />
+      <div className="flex items-center flex-col h-[21rem] justify-center p-6 bg-pink-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full max-w-[22rem]">
+        <h1 className=" text-pink-500 font-bold text-3xl">Memory</h1>
+        <p className="font-medium text-pink-500 text-sm py-6">
+          Flip over tiles looking for pairs
+        </p>
+
+        <button
+          onClick={start}
+          className="w-28 py-1 rounded-full bg-pink-500 text-white border-2 border-pink-500 font-bold mt-1"
+        >
+          Play
+        </button>
+      </div>
     </div>
   );
 }
@@ -109,12 +121,23 @@ export function PlayScreen({ end }) {
 
   return (
     <>
-      <div>
-        {getTiles(6).map((tile, i) => (
-          <Tile key={i} flip={() => flip(i)} {...tile} />
-        ))}
+      <div className="relative flex items-center justify-center h-screen">
+        <DarkTheme />
+        <div className="flex flex-col justify-center items-center ">
+          <h3 className=" text-indigo-500">
+            Tries
+            <span className="bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 px-2 py-1 rounded-md ml-2">
+              {tryCount}
+            </span>
+          </h3>
+
+          <div className="grid grid-cols-4 gap-4 bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-4 rounded-xl mt-4">
+            {getTiles(16).map((tile, i) => (
+              <Tile key={i} flip={() => flip(i)} {...tile} />
+            ))}
+          </div>
+        </div>
       </div>
-      {tryCount}
     </>
   );
 }
